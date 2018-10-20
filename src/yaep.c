@@ -6333,7 +6333,7 @@ use_functions (int argc, char **argv)
   ntok = 0;
   if (yaep_parse (g, test_read_token, test_syntax_error, test_parse_alloc,
 		  NULL, &root, &ambiguous_p))
-    fprintf (stderr, "yaep_parse: %s\n", yaep_error_message (g));
+    fprintf (stderr, "yaep parse: %s\n", yaep_error_message (g));
   OS_DELETE( mem_os );
   yaep_free_grammar (g);
 }
