@@ -5255,7 +5255,7 @@ prune_to_minimal (struct yaep_tree_node *node, int *cost)
 static void
 traverse_pruned_translation (struct yaep_tree_node *node)
 {
-  struct yaep_tree_node *child, *alt;
+  struct yaep_tree_node *child;
   hash_table_entry_t *entry;
   int i;
   
@@ -5281,8 +5281,11 @@ traverse_pruned_translation (struct yaep_tree_node *node)
       node->val.anode.cost = -node->val.anode.cost - 1;
       break;
     case YAEP_ALT:
-      for (alt = node; alt != NULL; alt = alt->val.alt.next)
-	traverse_pruned_translation (alt->val.alt.node);
+      traverse_pruned_translation (node->val.alt.node);
+      if (node->val.alt.next != NULL)
+        {
+          traverse_pruned_translation (node->val.alt.next);
+        }
       break;
     default:
       assert (FALSE);
